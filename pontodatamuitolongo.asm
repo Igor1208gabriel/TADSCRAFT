@@ -4,14 +4,24 @@
 #quando o personagem se move mais à frente, a borda aparenta estar mais perto:
 #ou seja, a main "olha" pra uma parte mais abaixo na shadow
 #.word lado
+
+# TODO:
+# Melhorar tras e frente para acresentar um efeito legal
+# adicionar imagem do "Lado"
+# adicionar camera para "Lado"
+# condicionais para parada de frente e tras
+# adicionar meia rotação para animação * 
+
+
+
 .text
 main:
 	
 	lui $8 0x1001 #ponteiro pro main
 	lui $9 0x1001 #ponteiro pras shadows
-	addi $9 $9 98304 #aponta para o início da 1º shadow 
+	addi $9 $9 98304 #início da 1º shadow 
 	addi $11 $0 8192 #1 tela
-	addi $12 $0 24576 #tela inteira
+	addi $12 $0 24576 #tela inteira/3 telas
 	
 
 mostrartela: #mostra toda a tela e carrega a shadow
@@ -29,37 +39,37 @@ mostrartela: #mostra toda a tela e carrega a shadow
 	j mortadela
 
 
-set:
+set: #configs pros ponteiros e contadores
 	lui $8 0x1001 #ponteiro pro main
 	lui $14 0xffff
 	addi $11 $0 8192 #1 tela
 	addi $12 $0 24576 #tela inteira
 	j esperar	
 	
-esperar:
+esperar: #while(true) // if(tecla_apertada) break
 	lw $13 0($14)
 	bne $13 $0 mudou
 	beq $0 $0 esperar
 
-mudou:
+mudou: #if (tecla == s) trás; elif(tecla == w) frente;
 	addi $13 $0 0
 	lw $13 0($14)
 	lw $25 4($14)
 	addi $13 $0 115 #s
-	beq $13 $25 descer
+	beq $13 $25 tras
 	addi $13 $0 119 #w
-	beq $13 $25 subir
-	j descer
+	beq $13 $25 frente
+	j mudou
 
-descer: 
+tras: #"subir" os pixels verdes //TODO
 	addi $9 $9 2048
 	j mortadela
 
-subir:
+frente: #"Descer" os pixels verdes // TODO
 	addi $9 $9 -2048
 	j mortadela
 	
-mortadela:
+mortadela: #Reescrever a tela 
 	addi $11 $11 -1
 	lw $13 0($9)
 	sw $13 0($8)

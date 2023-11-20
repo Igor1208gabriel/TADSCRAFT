@@ -13,14 +13,14 @@ main:
 	
 frente:
 	lui $11 0x1001
-	addi $11 $11 65536
+	addi $11 $11 32768
 	lui $8 0x1001
 	addi $10 $0 8192
 	addi $25 $0 0
 	j mostrar
 lado:
 	lui $11 0x1001
-	addi $11 $11 32768
+	addi $11 $11 65536
 	lui $8 0x1001
 	addi $10 $0 8192
 	addi $25 $0 1

@@ -1,30 +1,36 @@
+.include "TelaInicial.asm"
+.include "Lado.asm"
+.include "frente.asm"
+
 .text
 main:
 	lui $8 0x1001 #ponteiro para mostrar a tela
-	lui $9 0x1001 #ponteiro para qual tela mostrar
+	lui $9 0x1001 #ponteiro para o início de qual tela mostrar:
+#	0 	= telainicial
+#	32768 	= lado
+#	131072 	= frente
 	addi $10 $0 8192 #tamanho de uma tela
 	lui $14 0xffff #ponteiro para qual tecla foi apertada
 	j telainicial
 
 telainicial:
-	.include "TelaInicial.asm"
-	.text
 	lui $9 0x1001
 	lui $8 0x1001
 	j mortadela
 	
 lado:
-	.include "Lado.asm"
-	.text
-	lui $9 0x1001
-	lui $8 0x1001
-	j mortadela
-frente:
-	.include "frente.asm"
-	.text
 	lui $9 0x1001
 	addi $9 $9 32768
-	addi $10 $0 24576
+	addi $10 $0 8192
+	addi $24 $0 1
+	lui $8 0x1001
+	j mortadela
+	
+frente:
+	lui $9 0x1001
+	addi $9 $9 131072
+	addi $10 $0 8192
+	addi $24 $0 0
 	lui $8 0x1001
 	j mortadela
 	
@@ -44,5 +50,32 @@ esperar: #while(true) // if(tecla_apertada) break
 	
 mudou: #um tanto de if pra ver qual tecla foi apertada
 	lw   $25 4($14)
-	addi $13 $0 32 #valor do esspaço
+	addi $13 $0 32 #valor do espaço
 	beq  $25 $13 frente
+	addi $13 $0 'd'
+	beq $25 $13 ladooufrente
+	addi $13 $0 'a'
+	beq $25 $13 ladooufrente
+	addi $13 $0 'w'
+	beq $25 $23 cima
+	addi $13 $0 's'
+	beq $25 $13 baixo
+	j esperar
+
+ladooufrente:
+	add $13 $0 $0
+	beq $13 $24 lado
+	j frente
+
+cima:
+	addi $10 $0 8192
+	lui $8 0x1001
+	addi $9 $9 -512
+	j mortadela
+
+baixo:
+	addi $10 $0 8192
+	lui $8 0x1001
+	addi $9 $9 512
+	j mortadela
+	

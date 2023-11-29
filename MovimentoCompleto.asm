@@ -7,9 +7,9 @@ main:
 	lui $8 0x1001 #ponteiro para mostrar a tela
 	lui $9 0x1001 #ponteiro para o início de qual tela mostrar:
 #	0 	= telainicial
-#	32768 	= lado
-#	131072 	= frente
-	addi $10 $0 8192 #tamanho de uma tela
+#	131072 	= lado
+#	524288 	= frente
+	addi $10 $0 32768 #tamanho de uma tela
 	lui $14 0xffff #ponteiro para qual tecla foi apertada
 	j telainicial
 
@@ -19,16 +19,16 @@ telainicial:
 	j mortadela
 	
 lado:
-	addi $9 $9 -98304
-	addi $10 $0 8192
+	addi $9 $9 -393216 #98304 #
+	addi $10 $0 32768
 	addi $24 $0 1
 	lui $8 0x1001
 	j mortadela
 	
 frente:
 	
-	addi $9 $9 98304
-	addi $10 $0 8192
+	addi $9 $9 393216 #98304 #
+	addi $10 $0 32768
 	addi $24 $0 0
 	lui $8 0x1001
 	j mortadela
@@ -39,7 +39,7 @@ mortadela: #função básica para mostrar a tela
 	addi $8  $8 4
 	addi $9  $9 4
 	bne  $10 $0 mortadela
-	addi $9 $9 -32768
+	addi $9 $9 -131072 #32768 #
 	j esperar
 	
 
@@ -72,21 +72,21 @@ ladooufrente:
 	j frente
 
 cima:
-	addi $10 $0 8192
+	addi $10 $0 32768
 	lui $8 0x1001
-	addi $9 $9 -1024
+	addi $9 $9 -4069
 	j mortadela
 
 baixo:
-	addi $10 $0 8192
+	addi $10 $0 32768
 	lui $8 0x1001
-	addi $9 $9 1024
+	addi $9 $9 4096
 	j mortadela
 	
 inicio:
-	addi $10 $0 8192
+	addi $10 $0 32768
 	lui $8 0x1001
 	lui $9 0x1001
-	addi $9 $9 167936
+	addi $9 $9 167936 #
 	j mortadela
 	

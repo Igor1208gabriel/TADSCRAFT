@@ -32,7 +32,6 @@ frente:
 	addi $24 $0 0
 	lui $8 0x1001
 	j mortadela
-	
 mortadela: #função básica para mostrar a tela
 	addi $10 $10 -1
 	lw   $11 0($9)
@@ -42,6 +41,7 @@ mortadela: #função básica para mostrar a tela
 	bne  $10 $0 mortadela
 	addi $9 $9 -32768
 	j esperar
+	
 
 esperar: #while(true) // if(tecla_apertada) break
 	lw  $13 0($14)
@@ -86,6 +86,7 @@ baixo:
 inicio:
 	addi $10 $0 8192
 	lui $8 0x1001
-	addi $9 $9 161792
+	lui $9 0x1001
+	addi $9 $9 167936
 	j mortadela
 	

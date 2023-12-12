@@ -9,16 +9,18 @@
 
 .text
 paocima:
-	lui $8 	0x1001	#Ponteiro "para"
-	lui $9 	0x1001	#Ponteiro "de"
-	lui $10 	0xffff	#Visualizador de inputs
-	add $11 $0 $0		#"Carregador" de $9 para $8
+	lui    $8 	 0x1001	#Ponteiro "para"
+	lui    $9 	 0x1001	#Ponteiro "de"
+	lui    $10 	 0xffff	#Visualizador de inputs
+	addi $11 $0 0		#"Carregador" de $9 para $8
 	addi $12 $0 32768	#Contador do tamanho de uma tela (256*384)
 	addi $13 $0 0		#"Qual tela" 
-	addi $14 $0 6 
+	addi $14 $0 6 		#"Quantas telas"
+	addi $15 $0 393216 	#$12 * 4
 	j mortadela
 	
 picles:				#mostra o meio de "um" quando clicar no espaço
+	addi $13 $0 0
 	lui $9 0x1001		#reseta 9 pra posição inicial 
 	addi $9 $9 262144	#ajusta 9 na posição correta
 	j mortadela
@@ -34,7 +36,7 @@ ketchup:
 	j mortadela
 
 mostarda:
-	addi $9 $9 32768		#desce a tela
+	addi $9 $9 32768	#desce a tela
 	j mortadela
 	
 queijo:				#checa qual foi o input e vai para a função correspondente
@@ -59,16 +61,24 @@ mortadela:
 	addi $12 $0 32768	#volta $12 para seu valor antes de mortadela
 	j alface
 
-hamburguer:			#TOARRUMAR
+hamburguer:			
 	addi $13 $13 1
-	bge $13 $14 alface
+	bge $13 $14 picles
 	addi $9 $9 393216
 	j mortadela
 
-ovofrito:				#TOARRUMAR
+ovofrito:				
 	addi $13 $13 -1
-	ble $13 $0 alface
+	ble $13 $0 cebola
 	addi $9 $9 -393216
+	j mortadela
+
+cebola:
+	add $13 $0 $14
+	addi $14 $14 -1
+	mul $25 $15 $14 
+	addi $14 $14 1
+	add $9 $9 $25
 	j mortadela
 
 

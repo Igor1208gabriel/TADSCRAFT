@@ -19,14 +19,14 @@ paocima:
 	addi $15 $0 393216 	#$12 * 4
 	j mortadela
 	
-picles:				#mostra o meio de "um" quando clicar no espaço
-	addi $13 $0 0
-	lui $9 0x1001		#reseta 9 pra posição inicial 
-	addi $9 $9 262144	#ajusta 9 na posição correta
+picles:				#mostra o meio de "um" quando clicar no espaï¿½o
+	addi $13 $0 1
+	lui $9 0x1001		#reseta 9 pra posiï¿½ï¿½o inicial 
+	addi $9 $9 262144	#ajusta 9 na posiï¿½ï¿½o correta
 	j mortadela
 	
 		
-alface:				#função "wait"
+alface:				#funï¿½ï¿½o "wait"
 	lw $11 0($10)		#checa se houve input
 	bne $11 $0 queijo		
 	j alface
@@ -39,7 +39,7 @@ mostarda:
 	addi $9 $9 32768	#desce a tela
 	j mortadela
 	
-queijo:				#checa qual foi o input e vai para a função correspondente
+queijo:				#checa qual foi o input e vai para a funï¿½ï¿½o correspondente
 	lw $11 4($10)
 	beq $11 'w' ketchup
 	beq $11 'd' hamburguer

@@ -67,7 +67,7 @@ mortadela:
 
 hamburguer:			
 	addi $13 $13 1
-	bge  $13 $14 alho
+	bgt  $13 $14 alho
 	addi $9  $9  393216
 	j mortadela
 
@@ -86,12 +86,7 @@ cebola:
 	j mortadela
 
 alho:
-	addi $14 $14 -1	
-	addi $24 $0   4
-	mul  $25 $12 $14	#tamanho de tela * qtd de telas
-	mul  $25 $25 $24 	#linha anterior * 4
-	sub  $9  $9  $25	
-	addi $14 $14  1
-	add  $24 $0  $0
+	addi $9 $9 -3538944
+	addi $13 $0 1
 	j mortadela
 	

@@ -13,42 +13,42 @@
 
 .text
 paocima:
-	lui  $8 	0x1001	#Ponteiro "para"
-	lui  $9 	0x1001	#Ponteiro "de"
-	lui  $10 	0xffff	#Visualizador de inputs
-	addi $11 $0 	0	#"Carregador" de $9 para $8
+	lui  $8 		0x1001	#Ponteiro "para"
+	lui  $9 		0x1001	#Ponteiro "de"
+	lui  $10 		0xffff		#Visualizador de inputs
+	addi $11 $0 	0		#"Carregador" de $9 para $8
 	addi $12 $0 	32768	#Contador do tamanho de uma tela (256*384)
-	addi $13 $0 	0	#"Qual tela" 
-	addi $14 $0 	10	#"Quantas telas"
+	addi $13 $0 	0		#"Qual tela" 
+	addi $14 $0 	10		#"Quantas telas"
 	addi $15 $0 	393216 	#$12 * 4
 	j mortadela
 	
-picles:				#mostra o meio de "um" quando clicar no espa�o
+picles:				#mostra o meio de "um" quando clicar no espaco
 	addi $13 $0 	1
-	lui  $9 	0x1001	#reseta 9 pra posi��o inicial 
-	addi $9 $9 	262144	#ajusta 9 na posi��o correta
+	lui  $9 	0x1001	#reseta 9 pra posicao inicial 
+	addi $9 $9 	262144	#ajusta 9 na posicao correta
 	j mortadela
 	
 		
-alface:				#fun��o "wait"
-	lw  $11    0($10)	#checa se houve input
+alface:				#funcao "wait"
+	lw  $11    0($10)		#checa se houve input
 	bne $11 $0 queijo		
 	j alface
 
-ketchup:			#sobe a tela
+ketchup:				#sobe a tela
 	addi $9 $9 -8192
 	j mortadela
 
-mostarda:			#desce a tela
+mostarda:				#desce a tela
 	addi $9 $9  8192
 	j mortadela
 	
 queijo:				#checa qual foi o input e vai para a fun��o correspondente
 	lw  $11     4($10)
-	beq $11 'w' ketchup
+	beq $11 'w' rucula
 	beq $11 'd' hamburguer
-	beq $11 's' mostarda
-	beq $11 'a' ovofrito
+	beq $11 's' tomate
+	beq $11 'a' tomate
 	beq $11 ' ' picles
 	j alface
 	
@@ -89,4 +89,51 @@ alho:
 	addi $9 $9 -3538944
 	addi $13 $0 1
 	j mortadela
-	
+
+tomate:
+	addi $24 $0 268894208
+	beq $24 $9 alface
+	addi $24 $24 393216
+	beq $24 $9 alface
+	addi $24 $24 393216
+	beq $24 $9 alface
+	addi $24 $24 393216
+	beq $24 $9 alface
+	addi $24 $24 393216
+	beq $24 $9 alface
+	addi $24 $24 393216
+	beq $24 $9 alface
+	addi $24 $24 393216
+	beq $24 $9 alface
+	addi $24 $24 393216
+	beq $24 $9 alface
+	addi $24 $24 393216
+	beq $24 $9 alface
+	addi $24 $24 393216
+	beq $24 $9 alface
+	addi $24 $24 393216
+	j mostarda
+
+rucula:
+	addi $24 $0 268632064
+	beq $24 $9 alface
+	addi $24 $24 393216
+	beq $24 $9 alface
+	addi $24 $24 393216
+	beq $24 $9 alface
+	addi $24 $24 393216
+	beq $24 $9 alface
+	addi $24 $24 393216
+	beq $24 $9 alface
+	addi $24 $24 393216
+	beq $24 $9 alface
+	addi $24 $24 393216
+	beq $24 $9 alface
+	addi $24 $24 393216
+	beq $24 $9 alface
+	addi $24 $24 393216
+	beq $24 $9 alface
+	addi $24 $24 393216
+	beq $24 $9 alface
+	addi $24 $24 393216
+	j ketchup

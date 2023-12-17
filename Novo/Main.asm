@@ -10,7 +10,7 @@
 .include "08.asm"
 .include "09.asm"
 .include "10.asm"
-.include "mao.asm"
+#.include "mao.asm"
 
 .text
 paocima:
@@ -25,12 +25,12 @@ paocima:
 	addi $13 $0 	0		#"Qual tela" 
 	addi $14 $0 	10		#"Quantas telas"
 	addi $15 $0 	393216 	#$12 * 4
-	j teste #mortadela
+	j mortadela
 	
-teste:
-	addi $17 $17 -1
-	lw $11 0($16)
-	sw $11 0($8)
+#teste:
+#	addi $17 $17 -1
+#	lw $11 0($16)
+# 	sw $11 0($8)
 	
 	
 picles:					#mostra o meio de "um" quando clicar no espaco
